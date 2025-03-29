@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Analytics Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                        accent: '#3b82f6',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-heartbeat text-primary text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-gray-900">HealthInsight</span>
+                    </div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+                    <a href="#problem" class="text-gray-900 hover:text-primary px-3 py-2 text-sm font-medium">Problem</a>
+                    <a href="#data" class="text-gray-900 hover:text-primary px-3 py-2 text-sm font-medium">Data</a>
+                    <a href="#solutions" class="text-gray-900 hover:text-primary px-3 py-2 text-sm font-medium">Solutions</a>
+                    <a href="#contact" class="text-gray-900 hover:text-primary px-3 py-2 text-sm font-medium">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="bg-gradient-to-r from-primary to-secondary text-white">
+        <div class="max-w-7xl mx-auto py-24 px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                Transforming Healthcare Through Data
+            </h1>
+            <p class="mt-6 max-w-3xl mx-auto text-xl">
+                Leveraging analytics to solve critical healthcare challenges and improve patient outcomes
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Problem Statement Section -->
+        <section id="problem" class="mb-20">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">The Healthcare Challenge</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <p class="text-gray-700 mb-4">
+                        The healthcare industry faces numerous challenges including rising costs, inefficiencies in care delivery, 
+                        and disparities in access to quality care. These issues are compounded by an aging population and 
+                        increasing prevalence of chronic diseases.
+                    </p>
+                    <p class="text-gray-700 mb-4">
+                        Key problem areas include:
+                    </p>
+                    <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                        <li>Fragmented patient data across systems</li>
+                        <li>Inefficient resource allocation</li>
+                        <li>Delayed diagnosis and treatment</li>
+                        <li>Lack of predictive analytics for preventive care</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" 
+                         alt="Healthcare challenges" class="rounded-lg w-full h-auto">
+                </div>
+            </div>
+        </section>
+
+        <!-- Data Visualization Section -->
+        <section id="data" class="mb-20">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Data Insights</h2>
+            <div class="chart-wrapper">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Healthcare Expenditure Trends</h3>
+                <div class="chart-controls">
+                    <select id="expenditure-timeframe">
+                        <option value="5y">Last 5 Years</option>
+                        <option value="10y">Last 10 Years</option>
+                    </select>
+                    <button id="expenditure-export">Export Data</button>
+                </div>
+                <div class="chart-container">
+                    <canvas id="expenditure-chart"></canvas>
+                    <div class="loading-state hidden">
+                        <i class="fas fa-spinner fa-spin mr-2"></i>
+                        Loading data...
+                    </div>
+                    <div class="error-state hidden"></div>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="chart-wrapper">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Disease Prevalence</h3>
+                    <div class="chart-controls">
+                        <select id="disease-filter">
+                            <option value="all">All Diseases</option>
+                            <option value="chronic">Chronic Conditions</option>
+                            <option value="infectious">Infectious Diseases</option>
+                        </select>
+                        <button id="disease-export">Export Data</button>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="diseases-chart"></canvas>
+                        <div class="loading-state hidden">
+                            <i class="fas fa-spinner fa-spin mr-2"></i>
+                            Loading data...
+                        </div>
+                        <div class="error-state hidden"></div>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <h3 class="text-xl font-semibold text-gray-800 mb-4">Patient Outcomes</h3>
+                    <div class="chart-controls">
+                        <select id="outcomes-metric">
+                            <option value="all">All Metrics</option>
+                            <option value="satisfaction">Satisfaction Only</option>
+                            <option value="clinical">Clinical Outcomes</option>
+                        </select>
+                        <button id="outcomes-export">Export Data</button>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="outcomes-chart"></canvas>
+                        <div class="loading-state hidden">
+                            <i class="fas fa-spinner fa-spin mr-2"></i>
+                            Loading data...
+                        </div>
+                        <div class="error-state hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solutions Section -->
+        <section id="solutions" class="mb-20">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Our Data-Driven Solutions</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Predictive Analytics</h3>
+                    <p class="text-gray-700">
+                        Using machine learning to predict disease outbreaks and patient risks, enabling preventive care.
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Data Integration</h3>
+                    <p class="text-gray-700">
+                        Unified platforms that aggregate patient data from multiple sources for comprehensive insights.
+                    </p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="text-primary text-3xl mb-4">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">AI-Assisted Diagnosis</h3>
+                    <p class="text-gray-700">
+                        AI tools that help clinicians make faster, more accurate diagnoses based on patient data.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="mb-20">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Get In Touch</h2>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <form class="space-y-6">
+                    <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
+                        <div>
+                            <label for="first-name" class="block text-sm font-medium text-gray-700">First name</label>
+                            <input type="text" name="first-name" id="first-name" autocomplete="given-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary">
+                        </div>
+                        <div>
+                            <label for="last-name" class="block text-sm font-medium text-gray-700">Last name</label>
+                            <input type="text" name="last-name" id="last-name" autocomplete="family-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" name="email" id="email" autocomplete="email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+                        <textarea id="message" name="message" rows="4" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary"></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Solutions</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Predictive Analytics</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Data Integration</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">AI Diagnosis</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Resources</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Research Papers</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Case Studies</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Company</h3>
+                    <ul class="mt-4 space-y-4">
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Careers</a></li>
+                        <li><a href="#" class="text-base text-gray-300 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">Connect</h3>
+                    <div class="mt-4 flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-gray-700 pt-8 md:flex md:items-center md:justify-between">
+                <p class="text-base text-gray-400">
+                    &copy; 2023 HealthInsight. All rights reserved.
+                </p>
+                <div class="mt-4 md:mt-0">
+                    <a href="#" class="text-base text-gray-400 hover:text-white">Privacy Policy</a>
+                    <span class="mx-2 text-gray-500">•</span>
+                    <a href="#" class="text-base text-gray-400 hover:text-white">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
